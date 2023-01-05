@@ -21,7 +21,7 @@ def test_first_name_field_positive(first_name):
 
     page.register_link.click()
     page.wait_page_loaded()
-    page.first_name_field.send_keys("first_name")
+    page.first_name_field.send_keys(first_name)
     page.data_field.click()
     assert page.warning_message_names.get_text() == ''
     print(page.warning_message_names.get_text())
@@ -126,7 +126,7 @@ def test_password_field_positive(pass_word):
     assert page.password_input.get_text() == ''
 
 
-@pytest.mark.parametrize("password", ["passwor", "password", "password11" "парольпа", "Password11Password111",
+@pytest.mark.parametrize("password", ["passwor", "password", "password11", "парольпа", "Password11Password111",
                                       "<script>alert('Поле input уязвимо!')</script>", "SELECT*from NAMES"],
                          ids=["менее 8 символов", "нет спецсимвола или цифры", "без заглавной буквы",
                               "символы кириллицы", "более 20 символов", "XSS-инъекция", "SQL-инъекция"])
